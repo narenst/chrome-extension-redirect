@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "Stay Focussed",
+    "description": "Helps you to stay focussed on your work by automatically redirecting away from distracting websites.",
+    "version": "1.0",
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "images/focus_icon.png"
+    },
+    "background": {
+      "service_worker": "scripts/bootstrap.js"
+    },
+    "content_scripts": [
+      {
+        "js": ["scripts/redirect.js"],
+        "matches": ["<all_urls>"],
+        "run_at": "document_start"
+      }
+    ],
+    "permissions": [
+      "storage",
+      "tabs",
+      "alarms"
+    ]
+  }

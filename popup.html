@@ -1,0 +1,32 @@
+<html>
+  <body style="width:400px;">
+
+    <div id="status_bar" style="background-color:blue; height:10px; width:100%;"></div>
+    <h1>Keep your focus</h1>
+
+    <h2>Currently Focusing on</h2>
+    <div id="current-focus-site"></div>
+
+    <br/><br/>
+    <button id="make-site-as-focus">Set current tab as focus</button>
+
+    <br/><br/><hr>
+    <h2>Distracting websites</h2>
+    <table id="distracting-sites"></table>
+
+    <br/>
+    <button id="add-site-to-distraction-list">Add current tab to distractions</button>
+    
+    <br/><br/><hr>
+    <h2>Take a break</h2>
+
+    <button id="pause-for-1min" value="1">Break for 1 min</button>
+    <button id="pause-for-10min" value="10">Break for 10 min</button>
+    <div>
+      <p id="pause-message"></p>
+    </div>
+
+    <script src="popup.js"></script>
+    <script src="scripts/redirect.js"></script>
+  </body>
+</html>
