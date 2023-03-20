@@ -40,18 +40,3 @@ chrome.alarms.onAlarm.addListener(() => {
     chrome.tabs.sendMessage(tabs[0].id, {focus_mode: "ON"});
   });
 });
-
-
-// Message is sent when the tab has to be closed
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-
-    if (request.closeThisTab) {
-      // chrome.tabs.remove(sender.tab.id);
-      console.log("Received close this ..");
-
-      const internal_placeholder_url = chrome.runtime.getURL('html/sample.html');
-      location.assign(internal_placeholder_url);
-    }
-  }
-);

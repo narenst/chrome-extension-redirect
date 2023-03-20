@@ -55,7 +55,6 @@ async function loadFocusSite() {
                         focus_url;
         div_ref.appendChild(a_ref);
     } else {
-        // a_ref.innerText = "To pick a webpage or url to focus on, visit the page and click the button below."        
         const default_message = document.createElement('td');
         default_message.innerText = "To pick a webpage to focus on, visit the page and click the button below."
         div_ref.appendChild(default_message);
@@ -65,7 +64,6 @@ async function loadFocusSite() {
 async function loadStatus() {
     const status_response = await chrome.storage.local.get(['focus_mode']);
     const focus_mode = status_response.focus_mode;
-    // console.log(`Focus mode: ${focus_mode}`);
 
     const status_bar = document.getElementById('status_bar');
     const messageElem = document.getElementById('pause-message')
