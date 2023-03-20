@@ -41,23 +41,42 @@ async function loadFocusSite() {
     const focus_url_response = await chrome.storage.local.get(['focus_url']);
     const focus_url = focus_url_response.focus_url;
 
-    const div_ref = document.getElementById('current-focus-site');
-    div_ref.innerHTML = '';
+    const table_ref = document.getElementById('current-focus-site');
+    table_ref.innerHTML = '';
     
     if (focus_url) {
         const a_ref = document.createElement('a');
         a_ref.href = focus_url;
 
         //Url can get very long
-        const URL_MAX_LENGTH = 75;        
+        const URL_MAX_LENGTH = 75;
         a_ref.innerHTML = focus_url.length > URL_MAX_LENGTH ? 
                         focus_url.substring(0, 60) + '...' :
                         focus_url;
-        div_ref.appendChild(a_ref);
+        
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        tr.appendChild(td1);
+        td1.appendChild(a_ref);
+
+        // Add remove button
+        const remove_link = document.createElement('a');
+        remove_link.innerHTML = '[Remove]';
+        remove_link.href = '';
+        remove_link.onclick = (event) => {
+            clearFocusSite();
+        };
+
+        const td2 = document.createElement('td');
+        tr.appendChild(td2);
+        td2.appendChild(remove_link);
+
+        table_ref.appendChild(tr);
+
     } else {
-        const default_message = document.createElement('td');
+        const default_message = document.createElement('tr');
         default_message.innerText = "To pick a webpage to focus on, visit the page and click the button below."
-        div_ref.appendChild(default_message);
+        table_ref.appendChild(default_message);
     }
 }
 
@@ -100,6 +119,11 @@ async function removeSiteFromDistractions(index) {
     await chrome.storage.local.set({blocked_urls: urls});
 
     loadDistractionList();    
+}
+
+async function clearFocusSite() {
+    await chrome.storage.local.set({focus_url: ""});
+    loadFocusSite();
 }
 
 async function addSiteToDistractions() {
